@@ -7,7 +7,6 @@ public class RoadGeneration : MonoBehaviour {
     //[SerializeField] private Transform parent;g
     [SerializeField] private GameObject startPrefab;
     [SerializeField] private GameObject goalPrefab;
-    [SerializeField] private GameObject wayPrefab;
     [SerializeField] private Material roadMaterial;
 
 

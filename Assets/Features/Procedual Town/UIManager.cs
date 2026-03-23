@@ -7,14 +7,14 @@ using Button = UnityEngine.UI.Button;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("Start Menu")]
+    /* [Header("Start Menu")]
     [SerializeField] private Button startButton;
     [SerializeField] private TMP_InputField inputFieldSizeText;
     [SerializeField] private TMP_InputField inputFieldSeedText;
     [SerializeField] private GameObject background;
     [SerializeField] private GameObject sizeText;
     [SerializeField] private GameObject orText;
-    [SerializeField] private GameObject seedInputText;
+    [SerializeField] private GameObject seedInputText; */
     
     [Header("Generation Menu")]
     [SerializeField] private Button GenButton;
@@ -27,20 +27,20 @@ public class UIManager : MonoBehaviour
     {
         ShowSeedInText();
         SwitchToGen();
-        startButton.interactable = false;
-        inputFieldSeedText.interactable = false;
+        //startButton.interactable = false;
+        //inputFieldSeedText.interactable = false;
         
     }
     public void CheckIfInputHasText()
     {
-        if(string.IsNullOrWhiteSpace(inputFieldSizeText.text))
+        /* if(string.IsNullOrWhiteSpace(inputFieldSizeText.text))
         {
             startButton.interactable = false;
         }
         else
         {
             startButton.interactable = true;
-        }
+        } */
     }
 
     public void SwitchToGen()
@@ -51,13 +51,13 @@ public class UIManager : MonoBehaviour
 
     private void ChangeMenuUIActivity(bool value)
     {
-        startButton.gameObject.SetActive(value);
+        /* startButton.gameObject.SetActive(value);
         inputFieldSizeText.gameObject.SetActive(value);
         sizeText.SetActive(value);
         background.SetActive(value);
         orText.SetActive(value);
         inputFieldSeedText.gameObject.SetActive(value);
-        seedInputText.SetActive(value);
+        seedInputText.SetActive(value); */
     }
 
     private void ChangeGameUIActivity(bool value)
@@ -69,7 +69,7 @@ public class UIManager : MonoBehaviour
 
     public void TransferSizeSettings()
     {
-        generationSettings.townSize = int.Parse(inputFieldSizeText.text);
+        //generationSettings.townSize = int.Parse(inputFieldSizeText.text);
         Debug.Log($"Current population: { generationSettings.townSize}");
     }
 

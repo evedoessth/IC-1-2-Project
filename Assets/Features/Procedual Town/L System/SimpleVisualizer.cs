@@ -12,7 +12,7 @@ namespace ProceduralTown
         List<GameObject> houses = new List<GameObject>();
         List<Road> roads = new List<Road>();
         [SerializeField] private GameObject wayPoint;
-        [SerializeField] private Transform parent;
+        [SerializeField] private Transform lSystemParent;
         [SerializeField] private RoadGeneration roadGeneration;
         [SerializeField] private BasicObjectGeneration objectGeneration;
         public bool hasRandomRotation = false;
@@ -41,7 +41,7 @@ namespace ProceduralTown
         public void RunSimpleVisualizer(string sequence)
         {
             length = defaultLength;
-            ClearParentObject(parent);
+            ClearParentObject(lSystemParent);
             
             VisualizeSequence(sequence);
             GenerateHousesOnRoads();
@@ -106,7 +106,7 @@ namespace ProceduralTown
                     case EncodingLetters.draw:
                         tempPos = currentPos;
                         currentPos += direction * length;
-                        Road road = roadGeneration.CreateRoad(tempPos, currentPos, false, parent);
+                        Road road = roadGeneration.CreateRoad(tempPos, currentPos, false, lSystemParent);
                         Length -= 1;
                         roads.Add(road);
                         positions.Add(currentPos);
@@ -151,7 +151,7 @@ namespace ProceduralTown
             {
                 randomPointOnRoad = Random.Range(0.1f, 0.45f);
             }
-            GameObject house = objectGeneration.CreateHouseOnRoad(road.GetStartPoint(), road.GetEndPoint(), IsOnRightSide, randomPointOnRoad, 10, parent);
+            GameObject house = objectGeneration.CreateHouseOnRoad(road.GetStartPoint(), road.GetEndPoint(), IsOnRightSide, randomPointOnRoad, 10, lSystemParent);
             houses.Add(house);
             for (int j = 0; j < houses.Count - 1; j++)
             {
