@@ -564,7 +564,7 @@ MonoBehaviour:
   lSystemParent: {fileID: 643633779}
   roadGeneration: {fileID: 237229326}
   objectGeneration: {fileID: 237229328}
-  hasRandomRotation: 1
+  hasRandomRotation: 0
 --- !u!114 &237229328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,12 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfae4170b9a56514c8a6d70ab88490fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasicObjectGeneration
-  lSystemParent: {fileID: 643633779}
   house: {fileID: 5347040490271283432, guid: a3534cbc5e752f0429c4d64041010099, type: 3}
-  plazaPrefab: {fileID: 5874096229801002088, guid: 799039369762fb0459171495ec707fc8, type: 3}
-  cardinal: 0
-  generationSettings: {fileID: 11400000, guid: 578a89dc762895d4085ee253737311ed, type: 2}
-  roadGeneration: {fileID: 237229326}
 --- !u!4 &237229329
 Transform:
   m_ObjectHideFlags: 0
@@ -2217,7 +2212,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GenerationManager
   visualizer: {fileID: 237229327}
-  objectGeneration: {fileID: 237229328}
   lSystemGenerator: {fileID: 542618762}
   generationSettings: {fileID: 11400000, guid: 578a89dc762895d4085ee253737311ed, type: 2}
 --- !u!4 &2020948339

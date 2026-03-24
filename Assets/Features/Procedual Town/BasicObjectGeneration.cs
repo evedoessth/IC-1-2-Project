@@ -13,47 +13,45 @@ public enum cardinalDirection
 
 public class BasicObjectGeneration : MonoBehaviour
 {
-    [SerializeField] private Transform lSystemParent;
     [Header("Prefabs")]
     [SerializeField] private GameObject house;
-    [SerializeField] private GameObject plazaPrefab;
-    [SerializeField] private cardinalDirection cardinal = cardinalDirection.North;
-    //private static readonly string objectPrefabLocation = "Map Object/";
-
     private VectorCalculation vectorCalculation = new VectorCalculation();
-    [SerializeField] private GenerationSettings generationSettings;
-    [SerializeField] private RoadGeneration roadGeneration;
 
-    private int maxGenerationDistance = 30;
-    private int generationBufferLength = 10;
-    private int maxHouseGenerationDistance;
-    private int HouseAmount = 4;
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    
+    public GameObject CreateHouseOnRoad(Vector3 startPos, Vector3 goalPos, bool isOnRightSide, float distanceOnLine, int distance, Transform parent, HouseType houseType = HouseType.Home)
     {
-        generateObjectsWIP();
+        Vector3 roadPoint = Vector3.Lerp(goalPos, startPos, distanceOnLine);
+        Vector3 objectPoint = vectorCalculation.CalculatePointPerpendicularToLine(startPos, goalPos, roadPoint, distance, isOnRightSide);
+        Quaternion objectRot = Quaternion.LookRotation(roadPoint - objectPoint);
+        GameObject roadHouse = CreateHouse(objectPoint, objectRot, parent, houseType);
+        return roadHouse;
     }
 
-    public void generateObjectsWIP()
+    private GameObject CreateHouseAtEndOfRoad(Vector3 startPos, Vector3 goalPos, float distance, Transform parent, HouseType houseType)
     {
-        int townSize = generationSettings.townSize;
-        maxHouseGenerationDistance = maxGenerationDistance - generationBufferLength;
-        //CreateRandomHouses();
-        bool hasEntryRoad = true;
-        int[] houseAtPlaza = { 1, 0, 1, 0, 0, 0, 1, 1 };
-        CreatePlaza(hasEntryRoad, cardinal, houseAtPlaza);
-
-        Vector3 startPos = vectorCalculation.GetStartPosAtEdge(cardinalDirection.East, maxHouseGenerationDistance, maxHouseGenerationDistance, maxGenerationDistance);
-        Vector3 goalPos = vectorCalculation.GetRandomVectorInRange(5);
-        //Road road = CreateRoad(startPos, goalPos);
-        int Distance = 5 * 10;
-        //GameObject house = CreateHouseOnRoad(startPos, goalPos, true, Random.Range(0.1f, 0.2f), Distance, lSystemParent, HouseType.Work);
+        Vector3 objectPoint = vectorCalculation.CalculatePointAtEndOfLine(startPos,goalPos, distance);
+        Quaternion objectRot = Quaternion.LookRotation(startPos - goalPos);
+        GameObject endRoadHouse = CreateHouse(objectPoint, objectRot, parent, houseType);
+        return endRoadHouse;
+    }
+    
+    private GameObject CreateHouse(Vector3 objectPoint, Quaternion objectRot, Transform parent, HouseType houseType = HouseType.Home)
+    {
+        GameObject houseObj = Instantiate(house, objectPoint, objectRot, parent);
+        houseObj.layer = 3;
+        houseObj.GetComponent<House>().SetHouseType(houseType);
+        return houseObj;
     }
 
-    //Make this into a return thing for the GameObject so you can use inside information… May be even make plaza a individual type 
-    private void CreatePlaza(bool hasEntryRoad, cardinalDirection cardinal, int[] houseAtPoints)
+    private void CreateSphereAtPoint(GameObject prefab, Transform parent, Vector3 position)
+    {
+        GameObject sphere =  Instantiate(prefab, parent);
+        sphere.transform.position = position;
+    }
+
+
+}
+/*private void CreatePlaza(bool hasEntryRoad, cardinalDirection cardinal, int[] houseAtPoints)
     {
         GameObject plaza = Instantiate(plazaPrefab, vectorCalculation.GetRandomVectorInRange(5), Quaternion.identity, lSystemParent);
 
@@ -69,7 +67,7 @@ public class BasicObjectGeneration : MonoBehaviour
         for (int i = 0; i < houseAtPoints.Length; i++)
         {
             int plazaDirection = houseAtPoints[i];
-            if (plazaDirection == 1) // && wayPoint.transform.GetChild(i).gameObject.transform.position != plazaPointPos
+            if (plazaDirection == 1)
             {
                 GameObject house = CreateHouseAtEndOfRoad(plaza.transform.position, wayPoint.transform.GetChild(i).gameObject.transform.position, 1.1f, lSystemParent, HouseType.Home);
             }
@@ -106,53 +104,4 @@ public class BasicObjectGeneration : MonoBehaviour
             _ => v2,
         };
     }
-
-    public GameObject CreateHouseOnRoad(Vector3 startPos, Vector3 goalPos, bool isOnRightSide, float distanceOnLine, int distance, Transform parent, HouseType houseType = HouseType.Home)
-    {
-        Vector3 roadPoint = Vector3.Lerp(goalPos, startPos, distanceOnLine);
-        Vector3 objectPoint = vectorCalculation.CalculatePointPerpendicularToLine(startPos, goalPos, roadPoint, distance, isOnRightSide);
-        /*CreateSphereAtPoint(wayPrefab, parent, roadPoint);
-        CreateSphereAtPoint(wayPrefab, parent, objectPoint);*/
-        Quaternion objectRot = Quaternion.LookRotation(roadPoint - objectPoint);
-        GameObject roadHouse = CreateHouse(objectPoint, objectRot, parent, houseType);
-        return roadHouse;
-    }
-
-    private GameObject CreateHouse(Vector3 objectPoint, Quaternion objectRot, Transform parent, HouseType houseType = HouseType.Home)
-    {
-        GameObject houseObj = Instantiate(house, objectPoint, objectRot, parent);
-        houseObj.GetComponent<House>().SetHouseType(houseType);
-        return houseObj;
-    }
-
-    private GameObject CreateHouseAtEndOfRoad(Vector3 startPos, Vector3 goalPos, float distance, Transform parent, HouseType houseType)
-    {
-        Vector3 objectPoint = vectorCalculation.CalculatePointAtEndOfLine(startPos,goalPos, distance);
-        Quaternion objectRot = Quaternion.LookRotation(startPos - goalPos);
-        GameObject endRoadHouse = CreateHouse(objectPoint, objectRot, parent, houseType);
-        return endRoadHouse;
-    }
-    
-
-    private void CreateSphereAtPoint(GameObject prefab, Transform parent, Vector3 position)
-    {
-        GameObject sphere =  Instantiate(prefab, parent);
-        sphere.transform.position = position;
-    }
-
-    private Road CreateRoad(Vector3 startPos, Vector3 goalPos)
-    {
-        return roadGeneration.CreateRoad(startPos, goalPos, lSystemParent, true);
-    }
-
-    private void CreateRandomHouses()
-    {
-        for (int i = 0; i < HouseAmount; i++)
-        {
-            Vector3 randomPos = vectorCalculation.GetRandomVectorInRange(maxHouseGenerationDistance);
-            Vector3 randomRot = new Vector3(0.0f, Random.Range(0.0f, 360.0f));
-            GameObject h = Instantiate(house, randomPos, Quaternion.Euler(randomRot), lSystemParent);
-        }
-    }
-
-}
+ */

@@ -168,35 +168,45 @@ namespace ProceduralTown
 
         private void CheckCorrectGeneration(List<Road> roads, List<GameObject> houses)
         {
-            /* for (int i = 0; i < roads.Count-1; i++)
-            {
-                Road road = roads[i];
-                if (DoesThisRoadCrossAnother())
-                {
-                    roads.RemoveAt(i);
-                }
-            } */
-            //Collection that takes the game objects and gives them a field connected to the house type, 
-
-            int workAmount = (houses.Count/2)+1;
-            Debug.Log("Out of " + houses.Count + " houses, there are " + (workAmount-1) + " workplaces.");
+            int workAmount = (houses.Count / 2) + 1;
+            Debug.Log("Out of " + houses.Count + " houses, there are " + (workAmount - 1) + " workplaces.");
             while (workAmount > 0)
             {
-                foreach (GameObject house in houses)
+                for (int i = 0; i < houses.Count; i++)
                 {
-                    
+                    GameObject house = houses[i];
+                    if (!house.CompareTag("Work"))
+                    {
+                        UpdateNameAndTag(house, "Home", i);
+                    }
                     if (workAmount == 0)
                     {
                         continue;
                     }
-                    if (Random.value < 0.3f)
+                    if (Random.value < 0.2f && !house.CompareTag("Work"))
                     {
                         house.GetComponent<House>().SetHouseType(HouseType.Work);
+                        UpdateNameAndTag(house, "Work", workAmount);
                         workAmount--;
                     }
                 }
             }
             houses[0].GetComponent<House>().SetHouseType(HouseType.Tavern);
+            UpdateNameAndTag(houses[0], "Tavern");
+        }
+
+        private static void UpdateNameAndTag(GameObject gameObject, string name, int count = 0)
+        {
+
+            if (count == 0)
+            {
+                gameObject.name = name;
+            }
+            else
+            {
+                gameObject.name = name + " " + count;
+            }
+            gameObject.tag = name;
         }
 
         private bool DoesThisRoadCrossAnother()
