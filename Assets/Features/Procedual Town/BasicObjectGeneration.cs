@@ -33,25 +33,23 @@ public class BasicObjectGeneration : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
-        //generateObjectsWIP();
+        generateObjectsWIP();
     }
 
     public void generateObjectsWIP()
     {
         int townSize = generationSettings.townSize;
-        //Debug.Log("AAAAAAAAA: " + townSize);
         maxHouseGenerationDistance = maxGenerationDistance - generationBufferLength;
         //CreateRandomHouses();
-        bool hasEntryRoad = false;
-        int[] houseAtPlaza = { 1, 1, 1, 1, 1, 1, 1, 1 };
+        bool hasEntryRoad = true;
+        int[] houseAtPlaza = { 1, 0, 1, 0, 0, 0, 1, 1 };
         CreatePlaza(hasEntryRoad, cardinal, houseAtPlaza);
 
         Vector3 startPos = vectorCalculation.GetStartPosAtEdge(cardinalDirection.East, maxHouseGenerationDistance, maxHouseGenerationDistance, maxGenerationDistance);
         Vector3 goalPos = vectorCalculation.GetRandomVectorInRange(5);
-        Road road = CreateRoad(startPos, goalPos);
+        //Road road = CreateRoad(startPos, goalPos);
         int Distance = 5 * 10;
-        GameObject house = CreateHouseOnRoad(startPos, goalPos, true, Random.Range(0.1f, 0.2f), Distance, lSystemParent, HouseType.Work);
+        //GameObject house = CreateHouseOnRoad(startPos, goalPos, true, Random.Range(0.1f, 0.2f), Distance, lSystemParent, HouseType.Work);
     }
 
     //Make this into a return thing for the GameObject so you can use inside information… May be even make plaza a individual type 
@@ -82,16 +80,16 @@ public class BasicObjectGeneration : MonoBehaviour
     {
         switch(direction)
         {
-            case cardinalDirection.North:
+            case cardinalDirection.West:
             return GetRandomIntOfThree(5,6,7);
 
-            case cardinalDirection.East:
+            case cardinalDirection.North:
             return GetRandomIntOfThree(7,0,1);
 
-            case cardinalDirection.South:
+            case cardinalDirection.East:
             return GetRandomIntOfThree(1,2,3);
             
-            case cardinalDirection.West:
+            case cardinalDirection.South:
             return GetRandomIntOfThree(3,4,5);
             default:
             return 0;
@@ -144,7 +142,7 @@ public class BasicObjectGeneration : MonoBehaviour
 
     private Road CreateRoad(Vector3 startPos, Vector3 goalPos)
     {
-        return roadGeneration.CreateRoad(startPos, goalPos, true, lSystemParent);
+        return roadGeneration.CreateRoad(startPos, goalPos, lSystemParent, true);
     }
 
     private void CreateRandomHouses()
@@ -154,7 +152,6 @@ public class BasicObjectGeneration : MonoBehaviour
             Vector3 randomPos = vectorCalculation.GetRandomVectorInRange(maxHouseGenerationDistance);
             Vector3 randomRot = new Vector3(0.0f, Random.Range(0.0f, 360.0f));
             GameObject h = Instantiate(house, randomPos, Quaternion.Euler(randomRot), lSystemParent);
-            //h.transform.position = randomPos;
         }
     }
 

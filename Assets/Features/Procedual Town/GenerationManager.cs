@@ -8,11 +8,6 @@ public class GenerationManager : MonoBehaviour
     [SerializeField] private LSystemGenerator lSystemGenerator;
     [SerializeField] private GenerationSettings generationSettings;
 
-    void Start()
-    {
-        //BeginGeneration();
-    }
-
     public void BeginGeneration()
     {
         Random.InitState(generationSettings.seed);

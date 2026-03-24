@@ -11,7 +11,7 @@ public class RoadGeneration : MonoBehaviour {
 
 
 
-    public Road CreateRoad(Vector3 startPos, Vector3 goalPos, bool hasDebugState, Transform parent)
+    public Road CreateRoad(Vector3 startPos, Vector3 goalPos, Transform parent, bool hasDebugState)
     {
         if (hasDebugState)  
         {

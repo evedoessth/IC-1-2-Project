@@ -106,7 +106,7 @@ namespace ProceduralTown
                     case EncodingLetters.draw:
                         tempPos = currentPos;
                         currentPos += direction * length;
-                        Road road = roadGeneration.CreateRoad(tempPos, currentPos, false, lSystemParent);
+                        Road road = roadGeneration.CreateRoad(tempPos, currentPos, lSystemParent, false);
                         Length -= 1;
                         roads.Add(road);
                         positions.Add(currentPos);
