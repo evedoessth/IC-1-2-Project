@@ -3,12 +3,12 @@ using UnityEngine;
 public class VillagerState
 {
     protected Villager villager;
-    protected VillagerStateMachine villagerStateMachine;
+    protected VillagerStateMachine stateMachine;
 
-    public VillagerState(Villager villager, VillagerStateMachine villagerStateMachine)
+    public VillagerState(Villager villager, VillagerStateMachine stateMachine)
     {
         this.villager = villager;
-        this.villagerStateMachine = villagerStateMachine;
+        this.stateMachine = stateMachine;
     }
 
     public virtual void EnterState() { }

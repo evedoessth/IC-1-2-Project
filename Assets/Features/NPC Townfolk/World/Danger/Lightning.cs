@@ -10,7 +10,7 @@ public class Lightning : MonoBehaviour, IDanger
 
     private IEnumerator DestroyAfterTime ()
     {
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(2.0f);
         Destroy(gameObject);
     }
 }

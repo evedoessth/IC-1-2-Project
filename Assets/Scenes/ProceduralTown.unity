@@ -564,7 +564,7 @@ MonoBehaviour:
   lSystemParent: {fileID: 643633779}
   roadGeneration: {fileID: 237229326}
   objectGeneration: {fileID: 237229328}
-  hasRandomRotation: 0
+  hasRandomRotation: 1
 --- !u!114 &237229328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1825,18 +1825,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 255069178}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: TransferSeedSettings
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2020948338}
         m_TargetAssemblyTypeName: GenerationManager, Assembly-CSharp
         m_MethodName: BeginGeneration
@@ -2214,6 +2202,7 @@ MonoBehaviour:
   visualizer: {fileID: 237229327}
   lSystemGenerator: {fileID: 542618762}
   generationSettings: {fileID: 11400000, guid: 578a89dc762895d4085ee253737311ed, type: 2}
+  uIManager: {fileID: 255069178}
 --- !u!4 &2020948339
 Transform:
   m_ObjectHideFlags: 0

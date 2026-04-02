@@ -56,7 +56,6 @@ namespace ProceduralTown
                 children.Add(parent.GetChild(i).gameObject);
             }
             children.ForEach(child => Destroy(child));
-            //Debug.Log("Destroyed all children lines and dots");
         }
 
         private void VisualizeSequence(string sequence)
@@ -168,7 +167,7 @@ namespace ProceduralTown
 
         private void CheckCorrectGeneration(List<Road> roads, List<GameObject> houses)
         {
-            int workAmount = (houses.Count / 2) + 1;
+            int workAmount = houses.Count / 2;
             Debug.Log("Out of " + houses.Count + " houses, there are " + (workAmount - 1) + " workplaces.");
             while (workAmount > 0)
             {

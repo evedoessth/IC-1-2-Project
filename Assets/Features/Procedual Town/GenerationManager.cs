@@ -6,8 +6,9 @@ public class GenerationManager : MonoBehaviour
     [SerializeField] private SimpleVisualizer visualizer;
     [SerializeField] private LSystemGenerator lSystemGenerator;
     [SerializeField] private GenerationSettings generationSettings;
+    [SerializeField] private UIManager uIManager;
 
-    void Update()
+    public void Update()
     {
         if (Input.GetButtonDown("Jump"))
         {
@@ -16,6 +17,7 @@ public class GenerationManager : MonoBehaviour
     }
     public void BeginGeneration()
     {
+        uIManager.TransferSeedSettings();
         Random.InitState(generationSettings.seed);
         string sequence = lSystemGenerator.GenerateSentence();
         visualizer.RunSimpleVisualizer(sequence);

@@ -106,7 +106,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4267044314702671980
 Transform:
   m_ObjectHideFlags: 0
@@ -303,10 +303,10 @@ MonoBehaviour:
   tavern: {fileID: 0}
   Schedule: 
   IsMoving: 0
-  agent: {fileID: 0}
-  villagerTime: {fileID: 0}
+  agent: {fileID: 8605864453769729623}
+  villagerTime: {fileID: 11400000, guid: 253c80034ef9c894c8ca3d6e8fc51922, type: 2}
   debugMode: 0
-  debugPanel: {fileID: 0}
+  debugPanel: {fileID: 1767869551805719638}
 --- !u!136 &913593766414428892
 CapsuleCollider:
   m_ObjectHideFlags: 0
