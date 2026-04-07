@@ -560,7 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2505068a8dcd39b41a2bfd250f8e6044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProceduralTown.SimpleVisualizer
-  wayPoint: {fileID: 643633778}
+  wayPoint: {fileID: 9175598987356281564, guid: a123153fafa60ca4287abc1b274a91a1, type: 3}
   lSystemParent: {fileID: 643633779}
   roadGeneration: {fileID: 237229326}
   objectGeneration: {fileID: 237229328}

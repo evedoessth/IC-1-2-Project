@@ -120,9 +120,9 @@ namespace ProceduralTown
                         break;
                 }
             }
-            /* foreach (var position in positions)
+            /*foreach (var position in positions)
             {
-                Instantiate(wayPoint, position, Quaternion.identity, parent);
+                Instantiate(wayPoint, position, Quaternion.identity, lSystemParent);
             } */
             
         }
@@ -190,8 +190,9 @@ namespace ProceduralTown
                     }
                 }
             }
-            houses[0].GetComponent<House>().SetHouseType(HouseType.Tavern);
-            UpdateNameAndTag(houses[0], "Tavern");
+            int randomIndex = Random.Range(0, houses.Count);
+            houses[randomIndex].GetComponent<House>().SetHouseType(HouseType.Tavern);
+            UpdateNameAndTag(houses[randomIndex], "Tavern");
         }
 
         private static void UpdateNameAndTag(GameObject gameObject, string name, int count = 0)
